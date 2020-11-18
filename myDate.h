@@ -1,3 +1,7 @@
+//Issa Issa
+//CECS 282-07
+//Prog 2 myDate
+//03/04/2020
 #ifndef _myDate_h_
 #define _myDate_h_
 #include <string>;
@@ -18,5 +22,7 @@ class myDate {
 		int getYear();
 		int dayOfYear();
 		std::string dayName();
+		int getJulian();
+		myDate getRandom(myDate first, myDate second);
 };
 #endif

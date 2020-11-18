@@ -6,8 +6,12 @@
 #include <iostream>;
 #include <string>;
 #include <stdlib.h>
+#include <time.h>;
 int Greg2Julian(int month, int day, int year) {
 	return ((day - 32075) + (1461 * (year + 4800 + (month - 14) / 12)) / 4 + (367 * (month - 2 - 12 * ((month - 14) / 12))) / 12 - (3 * ((year + 4900 + (month - 14) / 12) / 100)) / 4);
+}
+int myDate::getJulian() {
+	return Greg2Julian(month, day, year);
 }
 //The & sign means pass by reference or nickname which means changing the values would change the original values
 void Julian2Greg(int JD, int& month, int& day, int& year) {
@@ -111,4 +115,15 @@ std::string myDate::dayName() {
 	int dayy = (yearcode + monthcode + centurycode + getDay() - leapyear) % 7;
 	std::string days[7] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 	return days[dayy];
+}
+myDate myDate::getRandom(myDate first, myDate second) {
+	int fst = Greg2Julian(first.getMonth(), first.getDay(), first.getYear());
+	int snd = Greg2Julian(second.getMonth(), second.getDay(), second.getYear());
+	myDate toReturn = myDate();
+	if (fst != snd) {
+		int randoom = rand() % (int)(snd - fst);
+		randoom += fst;
+		Julian2Greg(randoom, toReturn.month, toReturn.day, toReturn.year);
+	}
+	return toReturn;
 }
